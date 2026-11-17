@@ -17,7 +17,7 @@ spec:
       containers:
         - name: flights-api
           image: rodribolanos/pdes-2026c2-externalservice:main
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: 8081
               name: http

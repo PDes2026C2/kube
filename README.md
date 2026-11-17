@@ -26,7 +26,7 @@ flowchart LR
 | **frontend** | `rodribolanos/pdes-2026c2-frontend:main` | `LoadBalancer` | `80` | `http://localhost:5173` |
 | **backend** | `rodribolanos/pdes-2026c2-backend:main` | `LoadBalancer` | `8080` | `http://localhost:8080` |
 | **flights-api** | `rodribolanos/pdes-2026c2-externalservice:main` | `ClusterIP` | `8081` | *Interno* |
-| **postgres** | `postgres:16-alpine` | `ClusterIP` | `5432` | *Interno* |
+| **postgres** | `postgres:16-alpine` | `LoadBalancer` | `5432` | `localhost:5432` (DataGrip/DBeaver) |
 
 ---
 

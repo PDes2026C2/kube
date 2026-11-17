@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  labels:
+    app.kubernetes.io/part-of: tusviajes
+data:
+  POSTGRES_DB: "postgres"
+  SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/postgres"
+  FLIGHTS_API_BASE_URL: "http://flights-api:8081"
+  SPRING_FLYWAY_BASELINE_VERSION: "0"
+  JAVA_TOOL_OPTIONS: "-Duser.timezone=UTC"

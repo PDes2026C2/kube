@@ -4,7 +4,7 @@ Infraestructura declarativa (IaC) para desplegar los servicios de **TusViajes** 
 
 ---
 
-## 🏛️ Arquitectura del Clúster
+## Arquitectura del Clúster
 
 ```mermaid
 flowchart TD
@@ -53,7 +53,7 @@ flowchart TD
 
 ---
 
-## 📁 Estructura del Repositorio
+## Estructura del Repositorio
 
 ```text
 kube/
@@ -78,7 +78,7 @@ kube/
 
 ---
 
-## 🚀 Despliegue y Ejecución
+## Despliegue y Ejecución
 
 ### Prerrequisitos
 * Docker Desktop con soporte de **Kubernetes habilitado**.
@@ -110,29 +110,7 @@ postgres-xxxxxxxxxx-xxxxx          1/1     Running   0          45s
 
 ---
 
-## 🎯 Alineación con Conceptos de la Cátedra (PDES - UNQ)
-
-1. **Desacoplamiento de Pods (Slide 10)**:
-   * Cada componente corre en su propio Pod y Deployment aislado.
-   * Se evita expresamente el antipatrón de agrupar `backend + frontend + broker` dentro de un único Pod, garantizando escalabilidad y ciclo de vida independiente.
-
-2. **Políticas de Actualización (`imagePullPolicy: Always`)**:
-   * Las imágenes remotas utilizan el tag móvil `:main` generado por los workflows de CI/CD.
-   * Con `imagePullPolicy: Always`, Kubernetes valida contra Docker Hub el digest SHA-256 de la imagen en cada inicio, garantizando ejecutar la última versión publicada.
-
-3. **Resolución por DNS Interno y ClusterIP (Slide 11)**:
-   * Los servicios internos no necesitan conocer IPs dinámicas de los Pods. El backend resuelve el servicio de vuelos mediante el hostname automático del clúster: `http://flights-api:8081`.
-
-4. **Separación de Responsabilidades en Configuración (ConfigMaps vs Secrets)**:
-   * **ConfigMaps:** Variables operativas del entorno (`SPRING_DATASOURCE_URL`, `JAVA_TOOL_OPTIONS`, `FLIGHTS_API_BASE_URL`).
-   * **Secrets:** Credenciales de autenticación (`POSTGRES_USER`, `POSTGRES_PASSWORD`).
-
-5. **Nginx como Servidor Web y SPA Routing**:
-   * El frontend está empaquetado como aplicación SPA (Single Page Application). La configuración inyectada por ConfigMap resuelve rutas del lado del cliente (`try_files $uri $uri/ /index.html`), evitando errores 404 al refrescar páginas en rutas internas.
-
----
-
-## 🔄 Actualización de Imágenes sin Downtime
+## Actualización de Imágenes sin Downtime
 
 Cuando se publica una nueva versión de una imagen en Docker Hub bajo el mismo tag (`:main`), se fuerza la descarga y el reinicio progresivo (Rolling Update) mediante:
 
@@ -149,7 +127,7 @@ kubectl rollout status deployment/backend
 
 ---
 
-## 🧹 Comandos Útiles de Mantenimiento
+## Comandos Útiles
 
 ```powershell
 # Ver logs en vivo por etiqueta de aplicación
